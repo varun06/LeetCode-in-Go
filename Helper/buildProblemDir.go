@@ -4,7 +4,10 @@ import (
 	"fmt"
 	"log"
 	"os"
+<<<<<<< HEAD
 	"os/exec"
+=======
+>>>>>>> f33c3a477711033e1c5c5c04e72ce2c3c83f449e
 	"runtime/debug"
 	"strings"
 	"syscall"
@@ -52,6 +55,10 @@ func build(p problem) {
 		}
 	}()
 
+<<<<<<< HEAD
+=======
+    // windows用户注释这两行
+>>>>>>> f33c3a477711033e1c5c5c04e72ce2c3c83f449e
 	mask := syscall.Umask(0)
 	defer syscall.Umask(mask)
 
@@ -63,6 +70,7 @@ func build(p problem) {
 
 	log.Printf("开始创建 %d %s 的文件夹...\n", p.ID, p.Title)
 
+<<<<<<< HEAD
 	// 利用 chrome 打开题目页面
 	go func() {
 		cmd := exec.Command("google-chrome", p.link())
@@ -75,12 +83,35 @@ func build(p problem) {
 	fc := getFunction(p.link())
 
 	fcName, para, ans, fc := parseFunction(fc)
+=======
+	content, fc := getGraphql(p)
+	if fc == "" {
+		log.Panicf("查无Go语言写法")
+	}
+
+	// 利用 chrome 打开题目页面
+	// go func() {
+	// 	cmd := exec.Command("google-chrome", p.link())
+	// 	_, err = cmd.Output()
+	// 	if err != nil {
+	// 		panic(err.Error())
+	// 	}
+	// }()
+
+	// fc := getFunction(p.link())
+
+	fcName, para, ans, _ := parseFunction(fc)
+>>>>>>> f33c3a477711033e1c5c5c04e72ce2c3c83f449e
 
 	creatGo(p, fc, ans)
 
 	creatGoTest(p, fcName, para, ans)
 
+<<<<<<< HEAD
 	creatREADME(p)
+=======
+	creatREADME(p, content)
+>>>>>>> f33c3a477711033e1c5c5c04e72ce2c3c83f449e
 
 	log.Printf("%d.%s 的文件夹，创建完毕。\n", p.ID, p.Title)
 }
@@ -94,18 +125,36 @@ var typeMap = map[string]string{
 
 func creatGo(p problem, function, ansType string) {
 	fileFormat := `package %s
-
+%s
 %s
 `
+<<<<<<< HEAD
 
 	content := fmt.Sprintf(fileFormat, p.packageName(), function)
+=======
+>>>>>>> f33c3a477711033e1c5c5c04e72ce2c3c83f449e
 
-	returns := "\treturn nil\n}"
-	if v, ok := typeMap[ansType]; ok {
-		returns = fmt.Sprintf("\treturn %s\n}", v)
+	treeNodeDefine := ""
+	if strings.Contains(function, "*TreeNode") {
+		treeNodeDefine = `
+import "github.com/aQuaYi/LeetCode-in-Go/kit"
+
+// TreeNode is pre-defined...
+// type TreeNode struct {
+//     Val int
+//     Left *TreeNode
+//     Right *TreeNode
+// }
+type TreeNode = kit.TreeNode
+
+`
 	}
 
-	content = strings.Replace(content, "}", returns, -1)
+	content := fmt.Sprintf(fileFormat, p.packageName(), treeNodeDefine, function)
+
+	if v, ok := typeMap[ansType]; ok {
+		content = strings.Replace(content, "nil", v, 1)
+	}
 
 	filename := fmt.Sprintf("%s/%s.go", p.Dir(), p.TitleSlug)
 
@@ -131,10 +180,17 @@ func creatGoTest(p problem, fcName, para, ansType string) {
 
 	testFuncFormat := `
 func Test_%s(t *testing.T) {
+<<<<<<< HEAD
 	ast := assert.New(t)
 
 	for _, tc := range tcs {
 		ast.Equal(tc.ans, %s(%s), "输入:%s", tc)
+=======
+	a := assert.New(t)
+
+	for _, tc := range tcs {
+		a.Equal(tc.ans, %s(%s), "输入:%s", tc)
+>>>>>>> f33c3a477711033e1c5c5c04e72ce2c3c83f449e
 	}
 }`
 	tcPara := getTcPara(para)

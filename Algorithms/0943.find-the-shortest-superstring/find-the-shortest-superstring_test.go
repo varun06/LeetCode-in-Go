@@ -14,6 +14,14 @@ var tcs = []struct {
 }{
 
 	{
+<<<<<<< HEAD
+=======
+		[]string{"fgbabcde", "abcdefgb", "bcdei"},
+		"abcdefgbabcdei",
+	},
+
+	{
+>>>>>>> f33c3a477711033e1c5c5c04e72ce2c3c83f449e
 		[]string{"cedefifgstkyxfcuajfa", "ooncedefifgstkyxfcua", "assqjfwarvjcjedqtoz", "fcuajfassqjfwarvjc", "fwarvjcjedqtozctcd", "zppedxfumcfsngp", "kyxfcuajfassqjfwa", "fumcfsngphjyfhhwkqa", "fassqjfwarvjcjedq", "ppedxfumcfsngphjyf", "dqtozctcdk"},
 		"ooncedefifgstkyxfcuajfassqjfwarvjcjedqtozctcdkzppedxfumcfsngphjyfhhwkqa",
 	},

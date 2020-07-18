@@ -1,7 +1,11 @@
 language: go
 
 go:
+<<<<<<< HEAD
   - 1.11.x
+=======
+  - master
+>>>>>>> f33c3a477711033e1c5c5c04e72ce2c3c83f449e
 
 # whitelist
 branches:

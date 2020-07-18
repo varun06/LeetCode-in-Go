@@ -4,9 +4,14 @@ import (
 	"fmt"
 	"sort"
 	"strings"
+<<<<<<< HEAD
+=======
+
+	"github.com/TruthHun/html2md"
+>>>>>>> f33c3a477711033e1c5c5c04e72ce2c3c83f449e
 )
 
-func creatREADME(p problem) {
+func creatREADME(p problem, s string) {
 	fileFormat := `# [%d. %s](%s)
 
 %s
@@ -14,9 +19,11 @@ func creatREADME(p problem) {
 
 	questionDescription := strings.TrimSpace(getDescription(p.link()))
 
-	content := fmt.Sprintf(fileFormat, p.ID, p.Title, p.link(), questionDescription)
+	content := fmt.Sprintf(fileFormat, p.ID, p.Title, p.link(), questionDescription) + s + "\n\n## 解题思路\n\n## 可能的變化"
 
 	content = replaceCharacters(content)
+
+	content = html2md.Convert(content)
 
 	filename := fmt.Sprintf("%s/README.md", p.Dir())
 
@@ -36,7 +43,11 @@ func replaceCharacters(s string) string {
 		"&lt;":       "<",
 		"&gt;":       ">",
 		"&ge;":       ">=",
+<<<<<<< HEAD
 		"&nbsp;":     "`",
+=======
+		"&nbsp;":     " ",
+>>>>>>> f33c3a477711033e1c5c5c04e72ce2c3c83f449e
 		"&amp;":      "&",
 		"&#39;":      "'",
 		"   \n":      "\n",

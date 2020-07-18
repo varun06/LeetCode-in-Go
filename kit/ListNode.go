@@ -42,4 +42,40 @@ func Ints2List(nums []int) *ListNode {
 		t = t.Next
 	}
 	return l.Next
+<<<<<<< HEAD
+=======
+}
+
+// GetNodeWith returns the first node with val
+func (l *ListNode) GetNodeWith(val int) *ListNode {
+	res := l
+	for res != nil {
+		if res.Val == val {
+			break
+		}
+		res = res.Next
+	}
+	return res
+>>>>>>> f33c3a477711033e1c5c5c04e72ce2c3c83f449e
+}
+
+// Ints2ListWithCycle returns a list whose tail point to pos-indexed node
+// head's index is 0
+// if pos = -1, no cycle
+func Ints2ListWithCycle(nums []int, pos int) *ListNode {
+	head := Ints2List(nums)
+	if pos == -1 {
+		return head
+	}
+	c := head
+	for pos > 0 {
+		c = c.Next
+		pos--
+	}
+	tail := c
+	for tail.Next != nil {
+		tail = tail.Next
+	}
+	tail.Next = c
+	return head
 }

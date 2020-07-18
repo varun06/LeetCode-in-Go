@@ -33,7 +33,7 @@ func Test_Problem0078(t *testing.T) {
 				[]int{1, 2, 3},
 			},
 			ans{[][]int{
-				[]int{},
+				nil,
 				[]int{1},
 				[]int{2},
 				[]int{3},
@@ -49,7 +49,11 @@ func Test_Problem0078(t *testing.T) {
 				[]int{9, 0, 3, 5, 7},
 			},
 			ans{[][]int{
+<<<<<<< HEAD
 				[]int{},
+=======
+				nil,
+>>>>>>> f33c3a477711033e1c5c5c04e72ce2c3c83f449e
 				[]int{0},
 				[]int{3},
 				[]int{5},

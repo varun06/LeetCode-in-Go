@@ -1,5 +1,6 @@
 package problem0078
 
+<<<<<<< HEAD
 import (
 	"math"
 )
@@ -30,4 +31,14 @@ func rec(nums, temp []int, res *[][]int) {
 	withLast[0] = last
 	withLast = append(withLast, temp...)
 	rec(nums, withLast, res)
+=======
+func subsets(nums []int) [][]int {
+	res := make([][]int, 1, 1024)
+	for _, n := range nums {
+		for _, r := range res {
+			res = append(res, append([]int{n}, r...))
+		}
+	}
+	return res
+>>>>>>> f33c3a477711033e1c5c5c04e72ce2c3c83f449e
 }
